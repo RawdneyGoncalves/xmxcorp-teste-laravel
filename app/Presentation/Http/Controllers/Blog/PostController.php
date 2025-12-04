@@ -16,33 +16,39 @@ class PostController extends BaseController
         private DislikePostUseCase $dislikePostUseCase,
     ) {}
 
-    public function show(int $id)
+    public function show(int $external_id)
     {
         try {
-            $output = $this->getPostDetailUseCase->execute($id);
+            $output = $this->getPostDetailUseCase->execute($external_id);
             return view('pages.post.show', $output->toArray());
         } catch (EntityNotFoundException $e) {
             return redirect()->route('home')->with('error', $e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'Erro ao carregar post');
         }
     }
 
-    public function like(int $id)
+    public function like(int $external_id)
     {
         try {
-            $success = $this->likePostUseCase->execute($id);
+            $success = $this->likePostUseCase->execute($external_id);
             return response()->json(['success' => $success]);
         } catch (EntityNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 404);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Erro'], 500);
         }
     }
 
-    public function dislike(int $id)
+    public function dislike(int $external_id)
     {
         try {
-            $success = $this->dislikePostUseCase->execute($id);
+            $success = $this->dislikePostUseCase->execute($external_id);
             return response()->json(['success' => $success]);
         } catch (EntityNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 404);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Erro'], 500);
         }
     }
 }

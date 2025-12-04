@@ -16,25 +16,29 @@ class UserController extends BaseController
         private ListUserPostsUseCase $listUserPostsUseCase,
     ) {}
 
-    public function profile(int $id)
+    public function profile(int $external_id)
     {
         try {
-            $output = $this->getUserProfileUseCase->execute($id);
+            $output = $this->getUserProfileUseCase->execute($external_id);
             return view('pages.user.profile', $output->toArray());
         } catch (EntityNotFoundException $e) {
             return redirect()->route('home')->with('error', $e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'Erro ao carregar perfil');
         }
     }
 
-    public function posts(int $id, Request $request)
+    public function posts(int $external_id, Request $request)
     {
         try {
             $input = ListPostsInputDTO::fromArray(array_merge($request->all(), ['page' => $request->get('page', 1)]));
-            $output = $this->listUserPostsUseCase->execute($id, $input);
+            $output = $this->listUserPostsUseCase->execute($external_id, $input);
 
             return view('pages.user.posts', $output->toArray());
         } catch (EntityNotFoundException $e) {
             return redirect()->route('home')->with('error', $e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'Erro ao carregar posts');
         }
     }
 }

@@ -13,13 +13,17 @@ class HomeController extends BaseController
 
     public function index(Request $request)
     {
-        $input = ListPostsInputDTO::fromArray($request->all());
-
         try {
+            $input = ListPostsInputDTO::fromArray($request->all());
             $output = $this->listPostsUseCase->execute($input);
+
             return view('pages.home', $output->toArray());
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao carregar posts');
+            return view('pages.home', [
+                'posts' => [],
+                'total_posts' => 0,
+                'error' => 'Erro ao carregar posts: ' . $e->getMessage()
+            ]);
         }
     }
 }
