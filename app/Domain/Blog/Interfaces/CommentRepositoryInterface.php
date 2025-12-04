@@ -3,7 +3,7 @@
 namespace App\Domain\Blog\Interfaces;
 
 use App\Domain\Blog\Shared\Entities\CommentEntity;
-use App\Domain\Blog\ValueObjects\PostId;
+use App\Domain\Blog\Shared\ValueObjects\PostId;
 
 interface CommentRepositoryInterface
 {

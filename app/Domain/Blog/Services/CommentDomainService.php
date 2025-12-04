@@ -4,7 +4,7 @@ namespace App\Domain\Blog\Services;
 
 use App\Domain\Blog\Shared\Entities\CommentEntity;
 use App\Domain\Blog\Interfaces\CommentRepositoryInterface;
-use App\Domain\Blog\ValueObjects\PostId;
+use App\Domain\Blog\Shared\ValueObjects\PostId;
 
 class CommentDomainService
 {

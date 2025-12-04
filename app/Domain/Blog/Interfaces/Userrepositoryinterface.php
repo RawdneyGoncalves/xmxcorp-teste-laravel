@@ -3,7 +3,7 @@
 namespace App\Domain\Blog\Interfaces;
 
 use App\Domain\Blog\Shared\Entities\UserEntity;
-use App\Domain\Blog\ValueObjects\UserId;
+use App\Domain\Blog\Shared\ValueObjects\UserId;
 
 interface UserRepositoryInterface
 {

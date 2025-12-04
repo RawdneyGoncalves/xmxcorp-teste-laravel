@@ -6,7 +6,7 @@ use App\Domain\Blog\DTO\ListPostsInputDTO;
 use App\Domain\Blog\UseCases\GetUserProfileUseCase;
 use App\Domain\Blog\UseCases\ListUserPostsUseCase;
 use App\Presentation\Http\Controllers\BaseController;
-use App\Domain\Shared\Exceptions\EntityNotFoundException;
+use App\Domain\Blog\Shared\Exceptions\EntityNotFoundException;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController

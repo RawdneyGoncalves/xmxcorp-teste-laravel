@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Blog\ValueObjects;
+namespace App\Domain\Blog\Shared\ValueObjects;
 
 final class Tag
 {

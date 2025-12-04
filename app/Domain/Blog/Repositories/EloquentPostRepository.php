@@ -4,8 +4,8 @@ namespace App\Domain\Blog\Repositories;
 
 use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 use App\Domain\Blog\Shared\Entities\PostEntity;
-use App\Domain\Blog\ValueObjects\PostId;
-use App\Domain\Blog\ValueObjects\UserId;
+use App\Domain\Blog\Shared\ValueObjects\PostId;
+use App\Domain\Blog\Shared\ValueObjects\UserId;
 use App\Infrastructure\Persistence\Models\PostModel;
 use DateTime;
 
@@ -182,20 +182,20 @@ class EloquentPostRepository implements PostRepositoryInterface
     }
 
     public function save(PostEntity $post): void
-    {
-        $this->model->updateOrCreate(
-            ['external_id' => $post->getPostId()->getValue()],
-            [
-                'user_id' => $post->getUserId()->getValue(),
-                'title' => $post->getTitle(),
-                'body' => $post->getBody(),
-                'tags' => $post->getTags(),
-                'likes' => $post->getLikes(),
-                'dislikes' => $post->getDislikes(),
-                'views' => $post->getViews(),
-            ]
-        );
-    }
+{
+    $this->model->updateOrCreate(
+        ['external_id' => $post->getPostId()->getValue()],
+        [
+            'user_id' => $post->getUserId()->getValue(),
+            'title' => $post->getTitle(),
+            'body' => $post->getBody(),
+            'tags' => json_encode($post->getTags()),
+            'likes' => $post->getLikes(),
+            'dislikes' => $post->getDislikes(),
+            'views' => $post->getViews(),
+        ]
+    );
+}
 
     public function delete(PostId $postId): void
     {
@@ -217,16 +217,20 @@ class EloquentPostRepository implements PostRepositoryInterface
     }
 
     private function mapToEntity(PostModel $model): PostEntity
-    {
-        return new PostEntity(
-            postId: new PostId($model->external_id),
-            userId: new UserId($model->user_id),
-            title: $model->title,
-            body: $model->body,
-            tags: $model->tags ?? [],
-            likes: $model->likes ?? 0,
-            dislikes: $model->dislikes ?? 0,
-            views: $model->views ?? 0,
-        );
-    }
+{
+    $tags = is_array($model->tags) ? $model->tags : json_decode($model->tags ?? '[]', true);
+
+    return new PostEntity(
+        postId: new PostId($model->external_id),
+        userId: new UserId($model->user_id),
+        title: $model->title,
+        body: $model->body,
+        tags: $tags,
+        likes: $model->likes ?? 0,
+        dislikes: $model->dislikes ?? 0,
+        views: $model->views ?? 0,
+        createdAt: $model->created_at,
+        updatedAt: $model->updated_at,
+    );
+}
 }

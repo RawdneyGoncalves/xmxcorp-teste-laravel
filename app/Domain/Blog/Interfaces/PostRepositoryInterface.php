@@ -2,9 +2,9 @@
 
 namespace App\Domain\Blog\Interfaces;
 
-use App\Domain\Shared\Entities\PostEntity;
-use App\Domain\Blog\ValueObjects\PostId;
-use App\Domain\Blog\ValueObjects\UserId;
+use App\Domain\Blog\Shared\Entities\PostEntity;
+use App\Domain\Blog\Shared\ValueObjects\PostId;
+use App\Domain\Blog\Shared\ValueObjects\UserId;
 use DateTime;
 
 interface PostRepositoryInterface

@@ -4,7 +4,7 @@ namespace App\Domain\Blog\Repositories;
 
 use App\Domain\Blog\Interfaces\UserRepositoryInterface;
 use App\Domain\Blog\Shared\Entities\UserEntity;
-use App\Domain\Blog\ValueObjects\UserId;
+use App\Domain\Blog\Shared\ValueObjects\UserId;
 use App\Domain\Blog\Shared\ValueObjects\Email;
 use App\Infrastructure\Persistence\Models\UserModel;
 
