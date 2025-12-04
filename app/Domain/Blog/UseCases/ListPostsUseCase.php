@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Application\Blog\UseCases;
+namespace App\Domain\Blog\UseCases;
 
-use App\Application\Blog\DTO\ListPostsInputDTO;
-use App\Application\Blog\DTO\ListPostsOutputDTO;
-use App\Application\Blog\DTO\PostOutputDTO;
-use App\Application\Blog\Mappers\PostMapper;
-use App\Domain\Blog\Repositories\PostRepositoryInterface;
-use App\Domain\Blog\ValueObjects\PostId;
+use App\Domain\Blog\DTO\ListPostsInputDTO;
+use App\Domain\Blog\DTO\ListPostsOutputDTO;
+use App\Domain\Blog\Mappers\PostMapper;
+use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 
 class ListPostsUseCase
 {

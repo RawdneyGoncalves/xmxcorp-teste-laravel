@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Blog\DTO;
+namespace App\Domain\Blog\DTO;
 
 final class UserProfileOutputDTO
 {

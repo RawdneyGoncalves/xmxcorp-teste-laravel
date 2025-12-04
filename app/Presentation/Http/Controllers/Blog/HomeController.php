@@ -2,8 +2,8 @@
 
 namespace App\Presentation\Http\Controllers\Blog;
 
-use App\Application\Blog\DTO\ListPostsInputDTO;
-use App\Application\Blog\UseCases\ListPostsUseCase;
+use App\Domain\Blog\DTO\ListPostsInputDTO;
+use App\Domain\Blog\UseCases\ListPostsUseCase;
 use App\Presentation\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 

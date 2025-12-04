@@ -1,28 +1,26 @@
 <?php
 
-namespace App\Application\Blog\DTO;
+namespace App\Domain\Blog\DTO;
 
-final class ListPostsOutputDTO
+class ListPostsOutputDTO
 {
     public function __construct(
-        public readonly array $posts,
-        public readonly int $currentPage,
-        public readonly int $perPage,
-        public readonly int $total,
-        public readonly int $lastPage,
-        public readonly ?array $allTags = null,
+        public array $posts,
+        public int $currentPage,
+        public int $perPage,
+        public int $total,
+        public int $lastPage,
+        public array $allTags = []
     ) {}
 
     public function toArray(): array
     {
         return [
-            'posts' => array_map(fn(PostOutputDTO $post) => $post->toArray(), $this->posts),
-            'pagination' => [
-                'currentPage' => $this->currentPage,
-                'perPage' => $this->perPage,
-                'total' => $this->total,
-                'lastPage' => $this->lastPage,
-            ],
+            'posts' => $this->posts,
+            'currentPage' => $this->currentPage,
+            'perPage' => $this->perPage,
+            'total' => $this->total,
+            'lastPage' => $this->lastPage,
             'allTags' => $this->allTags,
         ];
     }

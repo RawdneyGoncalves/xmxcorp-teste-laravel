@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Blog\UseCases;
+namespace App\Domain\Blog\UseCases;
 
-use App\Domain\Blog\Repositories\PostRepositoryInterface;
+use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 use App\Domain\Blog\Services\PostDomainService;
 use App\Application\Shared\Exceptions\EntityNotFoundException;
 

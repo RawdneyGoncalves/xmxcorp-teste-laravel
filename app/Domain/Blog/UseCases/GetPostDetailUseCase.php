@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Application\Blog\UseCases;
+namespace App\Domain\Blog\UseCases;
 
-use App\Application\Blog\DTO\PostDetailOutputDTO;
-use App\Application\Blog\Mappers\CommentMapper;
-use App\Application\Blog\Mappers\PostMapper;
-use App\Domain\Blog\Repositories\PostRepositoryInterface;
+use App\Domain\Blog\DTO\PostDetailOutputDTO;
+use App\Domain\Blog\Mappers\CommentMapper;
+use App\Domain\Blog\Mappers\PostMapper;
+use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 use App\Domain\Blog\Services\PostDomainService;
-use App\Domain\Blog\ValueObjects\PostId;
 use App\Application\Shared\Exceptions\EntityNotFoundException;
 use App\Infrastructure\Persistence\Models\PostModel;
 
@@ -28,7 +27,7 @@ class GetPostDetailUseCase
 
         $this->postDomainService->viewPost($post->getPostId());
 
-        $postModel = PostModel::query()->byExternalId($externalPostId)->first();
+        $postModel = PostModel::query()->where('external_id', $externalPostId)->first();
 
         $postMapper = PostMapper::fromModelToDTO($postModel, $postModel->comments->count());
 

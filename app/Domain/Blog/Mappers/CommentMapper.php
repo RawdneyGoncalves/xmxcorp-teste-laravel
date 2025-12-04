@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Blog\Mappers;
+namespace App\Domain\Blog\Mappers;
 
 use App\Application\Blog\DTO\CommentOutputDTO;
 use App\Domain\Blog\Entities\CommentEntity;
@@ -27,7 +27,7 @@ class CommentMapper
     {
         return new CommentOutputDTO(
             id: $model->id,
-            externalId: $model->external_id,
+            externalId: $model->id,
             body: $model->body,
             likes: $model->likes,
             author: UserMapper::fromModelToDTO($model->user),

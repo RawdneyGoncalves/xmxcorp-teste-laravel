@@ -2,9 +2,9 @@
 
 namespace App\Presentation\Http\Controllers\Blog;
 
-use App\Application\Blog\DTO\ListPostsInputDTO;
-use App\Application\Blog\UseCases\GetUserProfileUseCase;
-use App\Application\Blog\UseCases\ListUserPostsUseCase;
+use App\Domain\Blog\DTO\ListPostsInputDTO;
+use App\Domain\Blog\UseCases\GetUserProfileUseCase;
+use App\Domain\Blog\UseCases\ListUserPostsUseCase;
 use App\Presentation\Http\Controllers\BaseController;
 use App\Application\Shared\Exceptions\EntityNotFoundException;
 use Illuminate\Http\Request;

@@ -2,9 +2,9 @@
 
 namespace App\Presentation\Http\Controllers\Blog;
 
-use App\Application\Blog\UseCases\GetPostDetailUseCase;
-use App\Application\Blog\UseCases\LikePostUseCase;
-use App\Application\Blog\UseCases\DislikePostUseCase;
+use App\Domain\Blog\UseCases\GetPostDetailUseCase;
+use App\Domain\Blog\UseCases\LikePostUseCase;
+use App\Domain\Blog\UseCases\DislikePostUseCase;
 use App\Presentation\Http\Controllers\BaseController;
 use App\Application\Shared\Exceptions\EntityNotFoundException;
 

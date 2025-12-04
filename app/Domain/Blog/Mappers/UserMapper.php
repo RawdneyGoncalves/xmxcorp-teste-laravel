@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Blog\Mappers;
+namespace App\Domain\Blog\Mappers;
 
-use App\Application\Blog\DTO\UserOutputDTO;
+use App\Domain\Blog\DTO\UserOutputDTO;
 use App\Domain\Blog\Entities\UserEntity;
 use App\Infrastructure\Persistence\Models\UserModel;
 

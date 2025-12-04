@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Application\Blog\UseCases;
+namespace App\Domain\Blog\UseCases;
 
-use App\Application\Blog\DTO\UserProfileOutputDTO;
-use App\Application\Blog\Mappers\PostMapper;
-use App\Application\Blog\Mappers\UserMapper;
-use App\Domain\Blog\Repositories\UserRepositoryInterface;
+use App\Domain\Blog\DTO\UserProfileOutputDTO;
+use App\Domain\Blog\Mappers\PostMapper;
+use App\Domain\Blog\Mappers\UserMapper;
+use App\Domain\Blog\Interfaces\UserRepositoryInterface;
 use App\Application\Shared\Exceptions\EntityNotFoundException;
 use App\Infrastructure\Persistence\Models\UserModel;
 
