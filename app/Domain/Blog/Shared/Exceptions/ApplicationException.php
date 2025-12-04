@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Shared\Exceptions;
+namespace App\Domain\Shared\Exceptions;
 
 class ApplicationException extends \Exception
 {

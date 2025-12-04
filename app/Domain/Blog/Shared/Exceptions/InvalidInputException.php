@@ -1,5 +1,5 @@
 <?php
-namespace App\Application\Shared\Exceptions;
+namespace App\Domain\Shared\Exceptions;
 
 class InvalidInputException extends ApplicationException
 {

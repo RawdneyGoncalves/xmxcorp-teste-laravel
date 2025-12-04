@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Shared\Exceptions;
+namespace App\Domain\Shared\Exceptions;
 
 class EntityNotFoundException extends ApplicationException
 {

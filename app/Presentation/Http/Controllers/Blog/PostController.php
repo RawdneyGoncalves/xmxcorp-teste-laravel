@@ -6,7 +6,7 @@ use App\Domain\Blog\UseCases\GetPostDetailUseCase;
 use App\Domain\Blog\UseCases\LikePostUseCase;
 use App\Domain\Blog\UseCases\DislikePostUseCase;
 use App\Presentation\Http\Controllers\BaseController;
-use App\Application\Shared\Exceptions\EntityNotFoundException;
+use App\Domain\Shared\Exceptions\EntityNotFoundException;
 
 class PostController extends BaseController
 {
