@@ -3,7 +3,7 @@
 namespace App\Domain\Blog\Mappers;
 
 use App\Domain\Blog\DTO\UserOutputDTO;
-use App\Domain\Blog\Entities\UserEntity;
+use App\Domain\Blog\Shared\Entities\UserEntity;
 use App\Infrastructure\Persistence\Models\UserModel;
 
 class UserMapper

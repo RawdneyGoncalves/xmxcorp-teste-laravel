@@ -2,7 +2,7 @@
 
 namespace App\Domain\Blog\Interfaces;
 
-use App\Domain\Blog\Entities\PostEntity;
+use App\Domain\Shared\Entities\PostEntity;
 use App\Domain\Blog\ValueObjects\PostId;
 use App\Domain\Blog\ValueObjects\UserId;
 use DateTime;

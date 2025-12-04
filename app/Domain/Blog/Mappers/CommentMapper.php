@@ -2,9 +2,9 @@
 
 namespace App\Domain\Blog\Mappers;
 
-use App\Application\Blog\DTO\CommentOutputDTO;
-use App\Domain\Blog\Entities\CommentEntity;
-use App\Domain\Blog\Entities\UserEntity;
+use App\Domain\Blog\DTO\CommentOutputDTO;
+use App\Domain\Blog\Shared\Entities\CommentEntity;
+use App\Domain\Blog\Shared\Entities\UserEntity;
 use App\Infrastructure\Persistence\Models\CommentModel;
 
 class CommentMapper

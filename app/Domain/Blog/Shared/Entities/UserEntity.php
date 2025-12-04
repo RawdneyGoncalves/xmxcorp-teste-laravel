@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Domain\Blog\Entities;
+namespace App\Domain\Blog\Shared\Entities;
 
 use App\Domain\Blog\ValueObjects\UserId;
-use App\Domain\Shared\ValueObjects\Email;
-use App\Domain\Shared\Entities\BaseEntity;
+use App\Domain\Blog\Shared\ValueObjects\Email;
 use DateTime;
 
 class UserEntity extends BaseEntity

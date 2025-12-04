@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Domain\Blog\Entities;
+namespace App\Domain\Blog\Shared\Entities;
 
 use App\Domain\Blog\ValueObjects\PostId;
 use App\Domain\Blog\ValueObjects\UserId;
-use App\Domain\Shared\Entities\BaseEntity;
 use DateTime;
 
 class CommentEntity extends BaseEntity

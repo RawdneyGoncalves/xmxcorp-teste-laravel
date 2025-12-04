@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Shared\Entities;
+namespace App\Domain\Blog\Shared\Entities;
 
 abstract class BaseEntity
 {

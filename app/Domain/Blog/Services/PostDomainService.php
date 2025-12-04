@@ -2,7 +2,7 @@
 
 namespace App\Domain\Blog\Services;
 
-use App\Domain\Blog\Entities\PostEntity;
+use App\Domain\Blog\Shared\Entities\PostEntity;
 use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 use App\Domain\Blog\ValueObjects\PostId;
 

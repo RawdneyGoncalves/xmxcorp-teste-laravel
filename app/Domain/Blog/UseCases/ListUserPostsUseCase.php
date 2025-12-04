@@ -7,7 +7,7 @@ use App\Domain\Blog\DTO\ListPostsOutputDTO;
 use App\Domain\Blog\Mappers\PostMapper;
 use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 use App\Domain\Blog\Interfaces\UserRepositoryInterface;
-use App\Application\Shared\Exceptions\EntityNotFoundException;
+use App\Domain\Shared\Exceptions\EntityNotFoundException;
 use App\Infrastructure\Persistence\Models\UserModel;
 
 class ListUserPostsUseCase

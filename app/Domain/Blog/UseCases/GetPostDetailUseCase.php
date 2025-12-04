@@ -7,7 +7,7 @@ use App\Domain\Blog\Mappers\CommentMapper;
 use App\Domain\Blog\Mappers\PostMapper;
 use App\Domain\Blog\Interfaces\PostRepositoryInterface;
 use App\Domain\Blog\Services\PostDomainService;
-use App\Application\Shared\Exceptions\EntityNotFoundException;
+use App\Domain\Shared\Exceptions\EntityNotFoundException;
 use App\Infrastructure\Persistence\Models\PostModel;
 
 class GetPostDetailUseCase

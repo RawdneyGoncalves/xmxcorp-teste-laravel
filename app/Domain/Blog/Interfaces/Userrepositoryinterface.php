@@ -2,7 +2,7 @@
 
 namespace App\Domain\Blog\Interfaces;
 
-use App\Domain\Blog\Entities\UserEntity;
+use App\Domain\Blog\Shared\Entities\UserEntity;
 use App\Domain\Blog\ValueObjects\UserId;
 
 interface UserRepositoryInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Shared\ValueObjects;
+namespace App\Domain\Blog\Shared\ValueObjects;
 
 final class Email
 {

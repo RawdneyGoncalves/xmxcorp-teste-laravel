@@ -2,8 +2,8 @@
 
 namespace App\Domain\Blog\Services;
 
-use App\Domain\Blog\Entities\UserEntity;
-use App\Domain\Blog\Repositories\UserRepositoryInterface;
+use App\Domain\Blog\Shared\Entities\UserEntity;
+use App\Domain\Blog\Interfaces\UserRepositoryInterface;
 use App\Domain\Blog\ValueObjects\UserId;
 
 class UserDomainService

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Blog\Interfaces;
 
-use App\Domain\Blog\Entities\CommentEntity;
+use App\Domain\Blog\Shared\Entities\CommentEntity;
 use App\Domain\Blog\ValueObjects\PostId;
 
 interface CommentRepositoryInterface
