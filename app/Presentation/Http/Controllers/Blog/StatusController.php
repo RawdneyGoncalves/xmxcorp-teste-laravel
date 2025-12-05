@@ -2,57 +2,68 @@
 
 namespace App\Presentation\Http\Controllers\Blog;
 
-use App\Infrastructure\ExternalApi\DummyJsonClient;
+use App\Presentation\Http\Controllers\BaseController;
 use App\Infrastructure\Persistence\Models\UserModel;
 use App\Infrastructure\Persistence\Models\PostModel;
 use App\Infrastructure\Persistence\Models\CommentModel;
-use App\Presentation\Http\Controllers\BaseController;
+use Illuminate\Support\Facades\Http;
 
 class StatusController extends BaseController
 {
     public function check()
     {
-        $status = [
-            'api' => $this->checkApi(),
-            'database' => [
-                'users' => UserModel::count(),
-                'posts' => PostModel::count(),
-                'comments' => CommentModel::count(),
-            ],
-            'samples' => $this->getSamples(),
-        ];
+        $api = $this->checkApi();
+        $database = $this->checkDatabase();
+        $samples = $this->getSamples();
 
-        return view('status', $status);
+        return view('status', [
+            'api' => $api,
+            'database' => $database,
+            'samples' => $samples
+        ]);
     }
 
-    private function checkApi(): array
+    private function checkApi()
     {
         try {
-            $client = new DummyJsonClient();
-            $users = $client->getUsers(1);
-            $posts = $client->getPosts(1);
-            $comments = $client->getComments(1);
+            $response = Http::timeout(5)->get('https://dummyjson.com/users');
 
-            return [
-                'status' => 'online',
-                'users_api' => !empty($users),
-                'posts_api' => !empty($posts),
-                'comments_api' => !empty($comments),
-            ];
+            if ($response->successful()) {
+                return [
+                    'status' => 'online',
+                    'users_api' => true,
+                    'posts_api' => true,
+                    'comments_api' => true
+                ];
+            }
         } catch (\Exception $e) {
             return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
+                'status' => 'offline',
+                'message' => $e->getMessage()
             ];
         }
+
+        return [
+            'status' => 'offline',
+            'message' => 'API retornou erro'
+        ];
     }
 
-    private function getSamples(): array
+    private function checkDatabase()
     {
         return [
-            'user' => UserModel::latest()->first()?->only(['first_name', 'last_name', 'email']),
-            'post' => PostModel::latest()->first()?->only(['title', 'likes', 'views']),
-            'comment' => CommentModel::latest()->first()?->only(['body', 'likes']),
+            'users' => UserModel::count(),
+            'posts' => PostModel::count(),
+            'comments' => CommentModel::count()
+        ];
+    }
+
+    private function getSamples()
+    {
+        return [
+            'user' => UserModel::orderBy('created_at', 'desc')->first()?->toArray(),
+            'post' => PostModel::orderBy('created_at', 'desc')->first()?->toArray(),
+            'comment' => CommentModel::orderBy('created_at', 'desc')->first()?->toArray()
         ];
     }
 }

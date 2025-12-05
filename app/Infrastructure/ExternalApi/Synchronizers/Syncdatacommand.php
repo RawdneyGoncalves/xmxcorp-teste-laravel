@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Infrastructure\ExternalApi\DummyJsonClient;
+use App\Infrastructure\ExternalApi\Services\SyncService;
 use App\Infrastructure\ExternalApi\Synchronizers\UserSynchronizer;
 use App\Infrastructure\ExternalApi\Synchronizers\PostSynchronizer;
 use App\Infrastructure\ExternalApi\Synchronizers\CommentSynchronizer;
@@ -10,58 +11,48 @@ use Illuminate\Console\Command;
 
 class SyncDataCommand extends Command
 {
-    protected $signature = 'sync:data {--users} {--posts} {--comments} {--all}';
+    protected $signature = 'sync:data {--force} {--clear}';
     protected $description = 'Sincroniza dados da DummyJSON API';
 
     public function handle(): int
     {
         $client = new DummyJsonClient();
 
-        $all = $this->option('all');
-        $users = $this->option('users') || $all;
-        $posts = $this->option('posts') || $all;
-        $comments = $this->option('comments') || $all;
-
-        if (!$users && !$posts && !$comments) {
-            $users = $posts = $comments = true;
+        if ($this->option('clear')) {
+            $client->clearCache();
+            $this->info('✓ Cache limpo');
         }
 
-        if ($users) {
-            $this->line('Sincronizando usuários...');
-            try {
-                $synchronizer = new UserSynchronizer($client);
-                $count = $synchronizer->sync();
-                $this->info("✓ {$count} usuários sincronizados");
-            } catch (\Exception $e) {
-                $this->error("Erro ao sincronizar usuários: " . $e->getMessage());
-            }
+        $userSync = new UserSynchronizer($client);
+        $postSync = new PostSynchronizer($client);
+        $commentSync = new CommentSynchronizer($client);
+
+        $syncService = new SyncService($client, $userSync, $postSync, $commentSync);
+
+        if (!$this->option('force') && !$syncService->shouldSync()) {
+            $lastSync = $syncService->getLastSyncTime();
+            $this->info("Última sincronização: {$lastSync}");
+            $this->info("Sincronização não necessária (próxima em 6h)");
+            return Command::SUCCESS;
         }
 
-        if ($posts) {
-            $this->line('Sincronizando posts...');
-            try {
-                $synchronizer = new PostSynchronizer($client);
-                $count = $synchronizer->sync();
-                $this->info("✓ {$count} posts sincronizados");
-            } catch (\Exception $e) {
-                $this->error("Erro ao sincronizar posts: " . $e->getMessage());
-            }
+        try {
+            $this->line('');
+            $results = $syncService->syncAll(function ($message) {
+                $this->line("  $message");
+            });
+
+            $this->line('');
+            $this->info("✓ {$results['users']} usuários sincronizados");
+            $this->info("✓ {$results['posts']} posts sincronizados");
+            $this->info("✓ {$results['comments']} comentários sincronizados");
+            $this->line('');
+            $this->info('Sincronização concluída com sucesso!');
+
+            return Command::SUCCESS;
+        } catch (\Exception $e) {
+            $this->error('Erro na sincronização: ' . $e->getMessage());
+            return Command::FAILURE;
         }
-
-        if ($comments) {
-            $this->line('Sincronizando comentários...');
-            try {
-                $synchronizer = new CommentSynchronizer($client);
-                $count = $synchronizer->sync();
-                $this->info("✓ {$count} comentários sincronizados");
-            } catch (\Exception $e) {
-                $this->error("Erro ao sincronizar comentários: " . $e->getMessage());
-            }
-        }
-
-        $this->line('');
-        $this->info('Sincronização concluída!');
-
-        return Command::SUCCESS;
     }
 }
